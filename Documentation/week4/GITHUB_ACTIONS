@@ -1,0 +1,45 @@
+** 20/07/26 **
+
+	-> all type of variables 
+		- single workflow variable
+		- configuration variable
+		- context variable
+		
+	-> input : ${{input.<variable>}}
+	
+	
+	
+	
+	
+	
+** 21/07/26 **
+
+	-> self hosted runners :
+	
+	-> made a small project [using, S3(aws s3 login from workflow without credentialsusing IAM services), IAM, github actions] : repo_name > net-project
+	
+	
+	
+	
+	
+	
+** 22/07/26 **
+
+	-> triggers : Triggers in GitHub Actions are specific events within a repository that initiate a workflow, defined under the on key in the workflow YAML file
+	
+	-> matrix : The matrix strategy in GitHub Actions allows you to define a single job configuration that automatically generates and runs multiple parallel jobs based on combinations of specified variables
+	
+	-> artifacts : GitHub Actions artifacts are primarily used to persist data after a job or workflow run has completed and to share files between isolated jobs within the same workflow.  Because each job executes on a fresh virtual machine, artifacts allow build outputs, test results, logs, or binaries to be uploaded to GitHub's storage and downloaded by subsequent jobs (like after workflow is completed and after that u want to share a output file then u have to store all data using artifacts and then u can share it)
+	
+	-> caching : Caching in GitHub Actions is primarily used to store and reuse files between workflow runs, such as dependencies, build outputs, and Docker layers, to significantly reduce execution time and save costs
+	
+	-> reusable workflows : we can call a workflow from the another workflow(Set the trigger to > on: workflow_call)
+	
+	
+	
+	
+	
+	
+	
+	
+

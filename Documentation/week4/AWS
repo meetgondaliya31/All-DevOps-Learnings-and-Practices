@@ -1,0 +1,28 @@
+** 22/07/26 **
+
+	-> cloudfront
+		
+		- custom error page
+		
+		- control access to yr content based on country
+		
+		- mini-project
+			> add header
+			> cache policy edit...
+			
+			
+			
+			
+			
+			
+** 24/07/26 **
+
+	-> VPC :
+	
+	-> subnet : 
+	
+	-> internet-gateway : give internet access to vpc
+	
+	-> route table : can define rules for subnets connection in vpc 
+	
+	-> create private subnet : create a route table with default configuration(0.0.0.0 - local) and add subnets in that table which u want to make private
