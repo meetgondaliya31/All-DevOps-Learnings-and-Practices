@@ -33,7 +33,7 @@
 	
 	-> caching : Caching in GitHub Actions is primarily used to store and reuse files between workflow runs, such as dependencies, build outputs, and Docker layers, to significantly reduce execution time and save costs
 	
-	-> reusable workflows : we can call a workflow from the another workflow(Set the trigger to > on: workflow_call)
+	-> reusable workflows : we can call a workflow from the another workflow(Set the trigger to > on: workflow_call:)
 	
 	
 	

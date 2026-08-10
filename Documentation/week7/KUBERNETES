@@ -1,0 +1,18 @@
+** 10/08/26 **
+
+	-> create clusters
+		- kind create cluster --name=<cluster_name> --config=<.yml_name>
+		- kubectl cluster-info --context kind-<cluster_name>
+		- kubectl get nodes
+		- kubectl config use-context kind-<cluster_name> : change default cluster
+	
+	-> namespace, pods, deployment, service
+		- kubectl get ns
+		- kubectl get pod -n <ns_name>
+		- kubectl create ns nginx
+		- kubectl run <pod_name> --image=nginx -n <ns_name>
+		- kubectl delete pod <pod_name> -n <ns_name>
+		- kubectl apply -f namespace.yml
+		- kubectl apply -f pod.yml
+		- kubectl exec -it <pod_name> -n <ns_name> -- bash
+		- kubectl describe pod/<pod_name> -n <ns_name>
