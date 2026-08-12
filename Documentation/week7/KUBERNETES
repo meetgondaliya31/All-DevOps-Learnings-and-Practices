@@ -1,7 +1,7 @@
 ** 10/08/26 **
 
 	-> create clusters
-		- kind create cluster --name=<cluster_name> --config=<.yml_name>
+		- kind create cluster --name=<cluster_name> --config=<yml_filename>
 		- kubectl cluster-info --context kind-<cluster_name>
 		- kubectl get nodes
 		- kubectl config use-context kind-<cluster_name> : change default cluster
@@ -9,10 +9,44 @@
 	-> namespace, pods, deployment, service
 		- kubectl get ns
 		- kubectl get pod -n <ns_name>
-		- kubectl create ns nginx
+		- kubectl get pod -n <ns_name> -o wide
+		- kubectl create ns <ns_name>
+		- kubectl delete ns <ns_name>
 		- kubectl run <pod_name> --image=nginx -n <ns_name>
 		- kubectl delete pod <pod_name> -n <ns_name>
 		- kubectl apply -f namespace.yml
-		- kubectl apply -f pod.yml
+		- kubectl apply -f pod.yml -n <ns_name>
 		- kubectl exec -it <pod_name> -n <ns_name> -- bash
 		- kubectl describe pod/<pod_name> -n <ns_name>
+
+		
+		
+		
+		
+				
+** 11/08/26 **
+
+	-> namespace, pods, deployment, service
+		- kubectl apply -f deployment.yml -n <ns_name>
+		- kubectl get deployment -n <ns_name>
+		- kubectl delete deployment <dpl_name> -n <ns_name>
+		- kubectl scale deployment <dpl_name> -n <ns_name> --replicas=10
+		
+		- Deployments and Replicasets does the same work but Deployments is more advanced and flexible like it provides rollout, rollin updates
+		
+		- Daemonsets is same as Deployment but it always allocates 1 pod to each node and does not support with replicas 
+		
+		
+		
+		
+		
+		
+** 12/08/26 **
+
+	-> jobs : is used to set any one job that does its work and terminated after complition (like apt update)
+		- kubectl apply -f job.yml -n <ns_name>
+		
+	-> cronJobs : it is use to set schedule for jobs
+		- kubectl apply -f cron.yml -n <ns_name>
+		
+	-> kubectl logs pod/<running_pod_name> -n <ns_name>

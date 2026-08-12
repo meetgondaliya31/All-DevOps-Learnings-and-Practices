@@ -1,0 +1,23 @@
+kind: DaemonSet
+apiVersion: apps/v1
+
+metadata: 
+  name: nginx-dmn
+
+spec:
+  selector:
+    matchLabels:
+      app: unique
+
+  template:
+    metadata:
+      labels: 
+        app: unique
+
+    spec:
+      containers:
+      - name: nginx-cont
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+    
