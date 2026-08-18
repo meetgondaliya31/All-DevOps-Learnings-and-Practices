@@ -1,0 +1,17 @@
+** 18/08/26 **
+
+	-> CRD (Custom Resource Definition) :
+		- make yr own custom file with all definition
+	
+	-> CR (custom Resource) :
+		- make yr file like a pod from crd
+		
+	-> helm : Helm is the package manager for Kubernetes. It helps you define, install, and upgrade applications on a Kubernetes cluster, from a single container to an application with many interdependent parts.
+Deploying an application to Kubernetes means writing and maintaining many manifests: Deployments, Services, ConfigMaps, and more.
+		- help provide all services of k8s just by installing helm
+		- helm package <app_name>
+		- helm install <release_name> <chart_name> -n <namespace_name> --create-namespace
+		- helm upgrade <release-name> <chart>
+		- helm rollback <release-name> <revision>
+		
+		

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+
+metadata: 
+  name: nginx-srvc
+  namespace: nginx
+
+spec:
+  selector:
+    app: unique
+
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
