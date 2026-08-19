@@ -1,7 +1,8 @@
 ** 10/08/26 **
 
 	-> create clusters
-		- kind create cluster --name=<cluster_name> --config=<yml_filename>
+		- kind create cluster --name=<cluster_name> --config=<yml_filename> 
+		- kind delete cluster --name=<cluster_name>
 		- kubectl cluster-info --context kind-<cluster_name>
 		- kubectl get nodes
 		- kubectl config use-context kind-<cluster_name> : change default cluster
