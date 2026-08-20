@@ -1,0 +1,55 @@
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment: 
+      MYSQL_DATABASE: devops
+      MYSQL_ROOT_PASSWORD: root
+    volumes: 
+      - mysql-data:/var/lib/mysql
+    networks: 
+      - two-tier
+    ports: 
+      - 3306:3306
+    restart: always
+    healthcheck: 
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s 
+
+
+  flask:
+    # build :
+    #   context: .
+    image: meetgondaliya11/two-tier-backend-app
+    container_name: two-tier-backend-app
+    environment: 
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: devops
+    networks: 
+      - two-tier
+    # scale: 3
+    ports:
+      - 5000-5005:5000
+    restart: always
+    depends_on: 
+      - mysql
+    healthcheck: 
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+
+
+
+volumes:
+  mysql-data:
+
+networks:
+  two-tier:

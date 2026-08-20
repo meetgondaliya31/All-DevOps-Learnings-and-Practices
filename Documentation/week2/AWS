@@ -1,0 +1,67 @@
+** 06/07/26 **
+
+	-> snapshot : backup for EBC
+		- we can put it on cycle by 'EBC lifecycle manager'
+		- snapshot recyclebin
+		- copy snapshot from one region to another
+		- encrypt the EBS volume
+		
+	-> EMI : create yr personalized EMI(amazon machine image)
+		- can share EMI with other user
+		
+	-> load balancer : balance the load of incoming users to yr server by auto allocating capable & healthy instance
+		- application load balancer 
+		- target groups
+		- path base routing in aplication load balancer(00.00.00.00/test)
+		
+		
+		
+		
+		
+		
+** 08/07/26 **
+
+	-> load balancer :
+		- How to get and hide client's IP address on application server
+		- stickiness and custom page routing(to show a page which does not exists, like page with error msg like : 404 page not found, have to add html file for the msg) 
+		- network load balancer
+		- launch template & auto scaling : It scals the number of instances using template we have created earlier(like whenever we have less request on the server it will decrease the number of instance and if the traffic is high then it will increase the number of instance)
+		
+		
+		
+		
+		
+		
+** 09/07/26 **
+
+	-> Auto scaling in action
+		- auto scaling with load balancer
+		
+	-> enable termination protection, hibernet vs poweroff 
+	
+	-> attach multiple nic(network interface)
+	
+	
+	-> IAM (Identity & Access management ) : 
+		- IAM user creation and permission access
+		- add user group
+		- IAM password policy 
+	
+	-> CLI : Connect aws to yr local : aws configure (can create ec2 from yr cli)
+		- access key : access key path in yr cli (.aws)
+	
+	-> create/terminate instance : aws ec2 help
+		- aws ec2 describe-instances 
+		- aws ec2 run-instances --image-id=<..> --instance-type=<..> ....
+	
+	-> Multiple acc in cli
+		- aws configure --profile account1
+		- asw ec2 describe-instances --profile=account1
+	
+	
+	
+	
+	
+	
+
+	

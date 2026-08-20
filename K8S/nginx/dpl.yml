@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata: 
+  name: nginx-dpl
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: unique
+
+  template:
+    metadata:
+      labels: 
+        app: unique
+
+    spec:
+      containers:
+      - name: nginx-cont
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: my-volume
+          mountPath: /var/www/html
+      volumes: 
+      - name: my-volume
+        persistentVolumeClaim: 
+          claimName: pvc-volume

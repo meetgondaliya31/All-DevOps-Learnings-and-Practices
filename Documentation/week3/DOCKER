@@ -1,0 +1,99 @@
+** 13/07/26 **
+
+	-> Dockerfile creation, image creation/pull, run container 
+		- docker build -t <img_name> .
+		- docker pull <img_name>
+		- docker run -d -p <local_port:container_port> --name=<container_name> <img_name>
+		- docker restart <container_name>
+		- docker stop <container_id> && docker rm <container_id>
+		
+		
+		
+		
+		
+		
+** 14/07/26 **
+
+	-> Docker networking :
+		- docker network ls
+		- docker network create <network_name> -d bridge
+		- docker run -d -p <local_port:container_port> --name=<container_name> --network=<network_name> -e <environments> <img_name>
+		- docker exec -it <container_id> bash (can access container)
+	
+	-> Docker volume and storage :
+		- docker volume ls
+		- docker volume create <volume_name>
+		- docker run -d --network=two-tier -v <volume_name>or<user_defined_path>:/var/lib/mysql --name=mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=devops mysql
+	
+	
+	
+	
+	
+	
+** 15/07/26 **
+
+	-> docker compose : 
+		- docker compose up -d
+		- docker compose stop
+		- docker compose down
+		- docker compose -f <docker-compose.yml> logs
+		- nohup docker attach <container_id> &
+		
+	-> docker registry :
+		- docker image tag <img_name:tag> <dockerhub_user_name/new_img_name:tag>
+		- docker push <img_name>
+		
+	-> multi-stage docker build :
+		- can create image with small size using smaller version to run that image and use previously defined big version only for downloading requirements 
+		- path of the requirements = /usr/local/lib/python3.9/site-packages
+		- in Dockerfile use = COPY --from=<alias_name_of_big_version> <requirements_path> <requirements_path> 
+		
+	-> scale :
+		- used for testing n all
+		- used to run same container multiple times on diff ports
+		- add in docker compose file = scale: 3
+		- remove container name from docker compose file because it will create its own
+		- increase the host port range (5000-5003:5000)	
+	
+	
+	
+	
+	
+	
+** 17/07/26 **
+
+	-> project (trainwithshubham.com)
+	
+	-> docker scout $ & docker init
+	
+	-> ssl
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	ItIsDocker.Io31m

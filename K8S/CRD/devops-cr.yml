@@ -1,0 +1,10 @@
+kind: FootballTurnament
+apiVersion: football.com/v1
+
+metadata:
+  name: football-turnament
+spec:
+  name: Champions League
+  level: All League
+  priceMoney: $10000 USD
+  players: 11 a side

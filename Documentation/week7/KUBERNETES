@@ -1,0 +1,123 @@
+** 10/08/26 **
+
+	-> create clusters
+		- kind create cluster --name=<cluster_name> --config=<yml_filename> 
+		- kind delete cluster --name=<cluster_name>
+		- kubectl cluster-info --context kind-<cluster_name>
+		- kubectl get nodes
+		- kubectl config use-context kind-<cluster_name> : change default cluster
+	
+	-> namespace, pods, deployment, service
+		- kubectl get ns
+		- kubectl get pod -n <ns_name>
+		- kubectl get pod -n <ns_name> -o wide
+		- kubectl create ns <ns_name>
+		- kubectl delete ns <ns_name>
+		- kubectl run <pod_name> --image=nginx -n <ns_name>
+		- kubectl delete pod <pod_name> -n <ns_name>
+		- kubectl apply -f namespace.yml
+		- kubectl apply -f pod.yml -n <ns_name>
+		- kubectl exec -it <pod_name> -n <ns_name> -- bash
+		- kubectl describe pod/<pod_name> -n <ns_name>
+
+		
+		
+		
+		
+				
+** 11/08/26 **
+
+	-> namespace, pods, deployment, service
+		- kubectl apply -f deployment.yml -n <ns_name>
+		- kubectl get deployment -n <ns_name>
+		- kubectl delete deployment <dpl_name> -n <ns_name>
+		- kubectl scale deployment <dpl_name> -n <ns_name> --replicas=10
+		
+		- Deployments and Replicasets does the same work but Deployments is more advanced and flexible like it provides rollout, rollin updates
+		
+		- Daemonsets is same as Deployment but it always allocates 1 pod to each node and does not support with replicas 
+		
+		
+		
+		
+		
+		
+** 12/08/26 **
+
+	-> jobs : is used to set any one job that does its work and terminated after complition (like apt update)
+		- kubectl apply -f job.yml -n <ns_name>
+		
+	-> cronJobs : it is use to set schedule for jobs
+		- kubectl apply -f cron.yml -n <ns_name>
+		
+	-> kubectl logs pod/<running_pod_name> -n <ns_name>
+	
+	-> pv - persistent volume
+		- can create in cluster
+	
+	-> pvc - persistent volume claim
+		- can create in namespace 
+
+
+
+
+
+
+** 13/08/26 **
+
+	-> sevice :
+		- in Kubernetes, a Service is a method for exposing a network application that is running as one or more Pods in your cluster
+		- it contains all deployments in it
+		
+	-> StatefulSets : are valuable for applications that require one or more of the following:
+		- Stable, unique network identifiers.
+		- Stable, persistent storage.
+		- Ordered, graceful deployment and scaling.
+		- Ordered, automated rolling updates.
+		- ex. databases (everything is organized)
+		
+	-> configMaps : to store env variables
+	
+	-> secrets : to store env passwords (use base64 to store pass)
+	
+	-> resource quotas and limits : give quota and limit to pod of memory, cpu etc usage
+	
+	-> probes : probes are used to check that our pods r active/running or not on the server
+	
+	-> taints & tolerations : taint is used to stop allocation of the pod from any specific node && toleration is used to give allocation to pod which is prevented from taint
+		- taint > kubectl taint node <node_name> prod=true:NoSchedule & for untaint > prod=true:NoSchedule-
+		- toleration > in dpl or pod file >  key: "prod"
+ 						     operator: "Equal"
+  						     value: "true"
+    						     effect: "NoSchedule"
+    	-> port-forward : kubectl port-forward service/<svc_name> -n <ns_name> 8080:80 --address=0.0.0.0
+	
+	
+	
+	
+	
+	
+** 14/08/26 **
+
+	-> HPA (Horizontal Pod Auto-scaling),  VPA (Vertical Pod Auto-scaling)
+		- need to install metrics API first 
+		- node specifications > kubectl top node
+		- pod specifications > kubectl top pod
+		
+	-> HPA : 
+		- scale pods horizontally so it scales the numbers of replica of yr pod (trigger on cpu utilization load)
+		- to trigger load on yr pod > kubectl run -it load-generator --image=busybox -n apache -- /bin/sh
+				 then in sh > while true; do wget -q -O- http://<svc_name>.<ns_name>.svc.cluster.local; done
+		
+	-> VPA :
+		- scale pods vertically so it scales the cpu core of yr pod (triggers on cpu utilization load)
+	
+	-> node affinity : Node affinity is a Kubernetes scheduling feature that constrains which nodes a pod can be scheduled on based on node labels. It serves as a more expressive and flexible replacement for the basic nodeSelector, allowing administrators to define complex placement rules using logical operators (like In, NotIn, Exists) rather than simple exact key-value matches.
+	
+	-> rbac (role base access control) :
+		- first we have to make role.yml to describe roles, then svc-acc.yml to describe user, and then have to make role-binding.yml to bind the role and user
+		- kubectl auth can-i get pod -n <ns_name> --as=<svc_acc_name>
+		- clusterRole  >  https://github.com/LondheShubham153/kubestarter/tree/main/kind-cluster  >  4. Setting Up the Kubernetes Dashboard
+		
+	-> Monitoring & logging using kubernetes dashboard(Setting Up the Kubernetes Dashboard) : https://github.com/LondheShubham153/kubestarter/tree/main/kind-cluster  >  4. Setting Up the Kubernetes Dashboard
+
