@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-configmap
-  namespace: mysql-ns
-
-data:
-  MYSQL_DATABASE: devops
-
