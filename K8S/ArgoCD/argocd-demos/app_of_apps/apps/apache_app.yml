@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/meetgondaliya31/All-DevOps-Learnings-and-Practices.git # Repo containing child apps(that you have forked and cloned earlier)
     targetRevision: main
-    path: K8S/ArgoCD/argocd-demos/declarative_approach/online_shop    # path of Apache app in `argocd-demos` repo
+    path: K8S/ArgoCD/argocd-demos/ui_approach/nginx   # path of Apache app in `argocd-demos` repo
   destination:
     server: https://kubernetes.default.svc # Replace with your Cluster Url, To get run: `argocd cluster list`
     namespace: default
