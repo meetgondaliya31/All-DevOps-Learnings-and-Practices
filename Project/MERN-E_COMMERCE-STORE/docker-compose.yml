@@ -1,0 +1,37 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_cont
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mern:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_cont
+    restart: always
+    ports: 
+      - "5173:4173"
+    depends_on:
+      - backend
+      - mongodb
+    
+  backend:
+    build: ./backend
+    container_name: backend_cont
+    restart: always
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongodb
+
+volumes:
+  mern:

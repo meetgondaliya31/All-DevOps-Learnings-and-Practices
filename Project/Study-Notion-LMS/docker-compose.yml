@@ -1,0 +1,47 @@
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb_cont
+    ports:
+      - "27017:27017"
+    volumes:
+      - mern:/data/db
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - study-app
+    
+  backend:
+    image: meetgondaliya11/backend-study-app
+    container_name: backend_cont
+    ports:
+      - "5000:5000"
+    restart: always
+    env_file: 
+      - ./backend/.env
+    depends_on: 
+      - mongodb
+    networks:
+      - study-app  
+
+  frontend:
+    image: meetgondaliya11/frontend-study-app
+    container_name: frontend_cont
+    ports: 
+      - "5173:80"
+    restart: always
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+      - mongodb
+    networks:
+      - study-app
+
+volumes:
+  mern:
+
+networks:
+  study-app:
