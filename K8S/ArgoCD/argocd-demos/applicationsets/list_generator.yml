@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-list
+  namespace: argocd
+spec:
+  # The list generator lets you enumerate a static set of elements (apps).
+  generators:
+    - list:
+        elements:
+          - app: nginx
+            path: K8S/ArgoCD/argocd-demos/ui_approach/nginx     # path in repo for this app
+          - app: online-shop
+            path: K8S/ArgoCD/argocd-demos/multicluster/online-shop   # path in repo for this app
+          - app: chaiapp
+            path: K8S/ArgoCD/argocd-demos/applicationsets/chai-app      # path in repo for this app
+          - app: apache
+            path: K8S/ArgoCD/argocd-demos/cli_approach/apache
+  # Template that will be used to generate individual Application CRs
+  template:
+    metadata:
+      # name template uses the element key 'app'
+      name: '{{app}}-list'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/meetgondaliya31/All-DevOps-Learnings-and-Practices.git
+        targetRevision: main
+        path: '{{path}}'                # resolved from element
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
