@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - meetgondaliya31/chai-devops:v1.0.3
