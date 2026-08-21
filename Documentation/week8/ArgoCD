@@ -2,11 +2,10 @@
 
 	-> argoCD : helps for gitops
 		- argoCD is defined in cluster and we need to push code to github so after that github connect to argoCD and argoCD apply or start all the file or service of kubernetes for us so we don't have to apply or start it manually
-		- 
 		
-		
-		
-		
+	-> All ArgoCD guideline and practice material : 
+		- https://github.com/LondheShubham153/argocd-in-one-shot.git
+		- https://github.com/LondheShubham153/argocd-demos.git
 		
 		
 		
@@ -26,4 +25,3 @@
 		
 		
 
-		ndkpzaykmtfxzkke
