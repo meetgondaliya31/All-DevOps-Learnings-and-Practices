@@ -1,0 +1,23 @@
+name: feedbackhub-backend-workflow
+
+on: 
+    workflow-dispatch:
+
+jobs:
+    build:
+
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: checkout code
+            - uses: actions/checkout@v7.0.1
+
+            - name: pull latest changes
+            - uses: git pull origin main
+
+            - steps: install dependencies
+            - uses: npm i 
+
+            - name: pm2 restart or pm2 start
+            - uses: pm2 restart index.js || pm2 start index.js
+
