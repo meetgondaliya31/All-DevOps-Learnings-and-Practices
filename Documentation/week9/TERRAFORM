@@ -1,0 +1,69 @@
+** 24/08/26 **
+
+	-> Terraform : Terraform is an open-source Infrastructure as Code (IaC) tool developed by HashiCorp that allows users to define and manage cloud and on-premises infrastructure using human-readable configuration files.
+		- terraform init
+		- terraform providers...(Local, AWS etc.)
+		- terraform plan (act as dry run)
+		- terraform validate (ckecks that terraform file is right or not)
+		- terraform apply (to apply terraform file)
+		- terraform destroy (--target)
+	
+	-> EC2 using terraform :
+		- terraform.tf
+		- provider.tf
+		- ec2.tf
+		- variables.tf
+		- outputs.tf
+	
+	-> meta arguments :
+		- count > if u r using count = 2 then do aws_instance.my_instance[*].public_ip (in output.tf file)
+		- for_each > for multiple instance with specified properties...
+		  	> for_each = tomap ({
+    			     	instance-1 = "t2.micro"
+    				instance-2 = "t3.micro"
+  		  		}) 
+  		  	> then use key & value formate for the reference(in output.tf file) of this like below...
+  		  		output ec2_public_ip {
+  					value = [
+    					for key in aws_instance.my_ec2 : key.public_ip 
+  					]
+				}
+  		- depends_on > depends_on = [ aws_security_group.my-sec-group, aws_key_pair.my_key ]
+  	
+  	-> conditional statement : like if else
+  		- variable.tf > 
+  			variable "default_storage_size" {
+  				default = 8
+  				type    = number
+			}
+			variable env {
+  				default = "prod"
+  				type = string
+			}
+		- ec2.tf > 
+			root_block_device {
+    				volume_size = var.env == "prod" ? 10 : var.default_storage_size
+    				volume_type = "gp3"
+  			}
+	
+	-> terraform state : stored in > terrafrom.tfstate
+		- terraform state list
+		- remove state > terraform state rm <state_name>
+		- import state > terraform import <state_name> <state_name_from_argument>
+		- import state (instance) > terraform import <state_name> <instance_id>
+			> also need to add this code in ec2.tf :
+								resource "aws_instance" "new_my_ec2" {
+    									instance_type = "unknown"
+    									ami = "unknown"
+								}
+	
+	-> ADVANCE - terraform.tfstate issue's solution :
+		- lockfiel
+		
+	-> ADVANCE - Environment specific terraform :
+		- terraform workspace list
+		- terraform workspace select default
+		- terraform workspace new dev
+		
+	-> VPC using terraform :
+		- 
